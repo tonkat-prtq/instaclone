@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update]
   def new
     @user = User.new
   end
@@ -6,6 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to user_path(@user.id) # GETメソッドの時,user_pathでshowアクション発火、その際引数としてユーザのIDをもたせる必要がある
     else
       render 'new'
@@ -13,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    
   end
 
   def edit
@@ -35,6 +37,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
+    params.require(:user).permit(:id, :name, :email, :password, :password_confirmation, :image, :image_cache)
   end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
 end
