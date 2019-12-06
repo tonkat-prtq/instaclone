@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  mount_uploader :image, ImageUploader
   validates :name, presence: true
   validates :name, length: { maximum: 30 }
   validates :email, presence: true
