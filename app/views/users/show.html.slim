@@ -1,9 +1,15 @@
 h1
   | #{@user.name} のページ
-p
-  | メールアドレス: #{@user.email}
+
+  p = image_tag @user.image.url
 
 - if @user.id == current_user.id
+  p
+    | メールアドレス: #{@user.email}
+
   = link_to 'edit', edit_user_path(@user.id), data: { confirm: 'Are you sure you want to edit it?' }, class: 'btn btn-info'
+
+
+
 
 / = link_to 'ブログ一覧画面', blogs_path
