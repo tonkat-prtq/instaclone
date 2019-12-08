@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   skip_before_action :login_required, only: [:new, :create]
-  
+
   def new
     @user = User.new
   end
@@ -21,7 +21,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user.image.cache! unless @user.image.blank? # 既に画像が存在する場合にキャッシュを作成する
+    if @user.id == current_user.id
+      @user.image.cache! unless @user.image.blank? # 既に画像が存在する場合にキャッシュを作成する
+    else
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update
