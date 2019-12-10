@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
   end
 
   def new
-    @blog = Blog.ne
+    @blog = Blog.neｗ
   end
 
   def create
@@ -37,7 +37,7 @@ class BlogsController < ApplicationController
     @blog.destroy
     redirect_to blogs_path, notice: 'ブログを削除しました'
   end
-  
+
   private
 
   def blog_params
