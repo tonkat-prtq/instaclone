@@ -38,6 +38,10 @@ class BlogsController < ApplicationController
     redirect_to blogs_path, notice: 'ブログを削除しました'
   end
 
+  def show
+    
+  end
+
   private
 
   def blog_params
