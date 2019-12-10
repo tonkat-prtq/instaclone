@@ -13,7 +13,7 @@ class BlogsController < ApplicationController
     if @blog.save
       redirect_to blogs_path, notice: "ブログを作成しました"
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -21,6 +21,23 @@ class BlogsController < ApplicationController
     @blog.image.cache! unless @blog.image.blank? # 既に画像が存在する場合キャッシュを作成する
   end
 
+  def update
+    if params[:back]
+      render :edit
+    else
+      if @blog.update(blog_params)
+        redirect_to blogs_path, notice: 'ブログを編集しました'
+      else
+        render :edit
+      end
+    end
+  end
+
+  def destroy
+    @blog.destroy
+    redirect_to blogs_path, notice: 'ブログを削除しました'
+  end
+  
   private
 
   def blog_params
