@@ -1,7 +1,33 @@
 class BlogsController < ApplicationController
 
-  def new
-    @blog = Blog.new
+  def index
+    @blogs = Blog.all
   end
-  
+
+  def new
+    @blog = Blog.ne
+  end
+
+  def create
+    @blog = current_user.blogs.build(blog_params)
+    if @blog.save
+      redirect_to blogs_path, notice: "ブログを作成しました"
+    else
+      render 'new'
+    end
+  end
+
+  def edit
+    @blog.image.cache! unless @blog.image.blank? # 既に画像が存在する場合キャッシュを作成する
+  end
+
+  private
+
+  def blog_params
+    params.require(:blog).permit(:id, :title, :content, :image, :image_cache)
+  end
+
+  def set_blog
+    @blog = Blog.find(params[:id])
+  end
 end
