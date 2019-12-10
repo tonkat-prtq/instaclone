@@ -15,10 +15,7 @@
   div.blog_image
     = f.label :image
     = image_tag(blog.image.url) if blog.image && blog.image.url
-    = f.title_field :image, class 'form-control-file'
+    = f.file_field :image, class: 'form-control-file'
     = f.hidden_field :image_cache
-  = if blog.new_record? 
-    f.submit 'ブログを作成する'
-  - else
-    f.submit 'ブログを編集する'
+  = f.submit
 = link_to 'トップに戻る', blogs_path
