@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :blogs
+  has_many :favorites, dependet: :destroy
   mount_uploader :image, ImageUploader
   validates :name, presence: true
   validates :name, length: { maximum: 30 }
