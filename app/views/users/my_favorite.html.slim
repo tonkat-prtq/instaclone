@@ -1,1 +1,20 @@
 h1 お気に入り一覧
+table.table.table-hover
+  thead.thead-default
+    tr
+      th タイトル
+      th 内容
+      th 投稿者
+      th 画像
+      th
+      th
+  tbody
+    tr
+      - @my_favorite_blogs.each do |blog|
+        td = blog.title
+        td = blog.content
+        td = blog.user.name
+        td = image_tag(blog.image.url(:thumb))
+        td = link_to '詳細を確認する', blog_path(blog.id)
+      - @favorite.each do |favorite|
+        td = link_to 'お気に入り解除する', favorite_path(id: favorite.id), method: :delete, class: 'btn btn-danger'

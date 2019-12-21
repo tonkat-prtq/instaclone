@@ -41,7 +41,8 @@ class UsersController < ApplicationController
   end
 
   def my_favorite
-    
+    @favorite = current_user.favorites
+    @my_favorite_blogs = current_user.favorite_blogs # ユーザーがお気に入りしたblogの情報
   end
 
   private
