@@ -12,7 +12,7 @@ html
       div.navbar-brand Instaclone
       ul.div.navbar-nav.mr-auto
         - if logged_in?
-          li.div.nav-item = link_to "Profile", user_path(current_user.id), class: 'nav-link'
+          li.div.nav-item = link_to "My Page", user_path(current_user.id), class: 'nav-link'
           li.div.nav-item = link_to "Logout", session_path(current_user.id), method: :delete, class: 'nav-link'
         - else
           li.div.nav-item = link_to "Sign Up", new_user_path, class: 'nav-link'
