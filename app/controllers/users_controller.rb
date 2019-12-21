@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def my_favorite
+    
+  end
+
   private
 
   def user_params
