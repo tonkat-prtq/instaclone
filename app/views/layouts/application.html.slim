@@ -9,7 +9,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     div.navbar.navbar-expand-md.navbar-light.bg-light
-      div.navbar-brand Instaclone
+      div.navbar-brand = link_to "Instaclone", blogs_path, class: 'text-decoration-none text-reset'
       ul.div.navbar-nav.mr-auto
         - if logged_in?
           li.div.nav-item = link_to "My Page", user_path(current_user.id), class: 'nav-link'
