@@ -46,6 +46,12 @@ class BlogsController < ApplicationController
     @favorite = current_user.favorites.find_by(blog_id: @blog.id)
   end
 
+  def confirm
+    @blog = current_user.blog.build(blog_params)
+    @blog.id = params[:id]
+    render :new if @blog.invalid?
+  end
+
   private
 
   def blog_params
