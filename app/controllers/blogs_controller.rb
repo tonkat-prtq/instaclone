@@ -18,7 +18,11 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    @blog.image.cache! unless @blog.image.blank? # 既に画像が存在する場合キャッシュを作成する
+    if current_user.id == @blog.user.id
+      @blog.image.cache! unless @blog.image.blank? # 既に画像が存在する場合キャッシュを作成する
+    else
+      redirect_to blogs_path, notice: "自分の記事以外の編集は出来ません"
+    end
   end
 
   def update
