@@ -1,0 +1,22 @@
+h3 confirm
+
+= form_with(model: @blog, url: confirm_new_or_edit, method: confirm_form_method, local: true) do |f|
+  = f.hidden_field :title
+  = f.hidden_field :content
+  = f.hidden_field :image
+  = f.hidden_field :image_cache
+
+  p title: #{@blog.title}
+  p content: #{@blog.content}
+  p image: #{image_tag(@blog.image.url) if @blog.image && @blog.image.url}
+  - if @blog.id # 更新時と新規投稿時でボタンの内容を変える
+    = f.submit 'Update'
+  - else
+    = f.submit 'Post'
+
+= form_with(model: @blog, url:new_blog_path, local: true, method: "get") do |f|
+  = f.hidden_field :title
+  = f.hidden_field :content
+  = f.hidden_field :image
+  = f.hidden_field :image_cache
+  = f.submit 'Back', name: 'back', class: 'mt-1'
