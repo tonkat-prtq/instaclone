@@ -15,7 +15,7 @@ table.table.table-hover
     tr
       td = blog.title
       td = blog.content
-      td = blog.user.name
+      td = link_to "#{blog.user.name}", user_path(blog.user.id)
       - if blog.image.present?
         td = image_tag(blog.image.url(:thumb))
       - else
