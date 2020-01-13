@@ -16,7 +16,10 @@ table.table.table-hover
       td = blog.title
       td = blog.content
       td = blog.user.name
-      td = image_tag(blog.image.url(:thumb))
+      - if blog.image.present?
+        td = image_tag(blog.image.url(:thumb))
+      - else
+        td
       td = link_to '詳細を確認する', blog_path(blog.id)
       - if current_user.id == blog.user.id
         td = link_to 'ブログを編集する', edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' }
