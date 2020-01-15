@@ -1,4 +1,7 @@
 / h1 ブログ一覧
+head
+  script src="https://kit.fontawesome.com/b4dcd746af.js" crossorigin="anonymous"
+
 .card-deck
   .row
     .col-md-12
@@ -10,9 +13,9 @@
           .card-body
             = blog.content
           - if current_user.id == blog.user.id
-            .btn-group
-              btn.btn-primary.btn-sm = link_to "編集", "#{edit_blog_path(blog.id)}", class: 'text-reset'
-              btn.btn-danger.btn-sm = link_to "削除", "#{blog_path(blog.id)}", method: :delete, class: 'text-reset'
+            = link_to "#{edit_blog_path(blog.id)}", class: 'text-reset'
+              i.fas.fa-edit
+            / btn.btn-danger.btn-sm = link_to "削除", "#{blog_path(blog.id)}", method: :delete, class: 'text-reset'
           .card-footer = link_to "#{blog.user.name}", user_path(blog.user.id)
 
 
