@@ -1,31 +1,47 @@
-h1 ブログ一覧
+/ h1 ブログ一覧
+.card-deck
+  .row
+    .col-md-12
+      - @blogs.each do |blog|
+        .card.mb-5
+          h5.card-header = link_to "#{blog.title}", blog_path(blog.id)
+          - if blog.image.present?
+            img.card-img-top src="#{blog.image.url}" /
+          .card-body
+            = blog.content
+          - if current_user.id == blog.user.id
+            .btn-group
+              btn.btn-primary.btn-sm = link_to "編集", "#{edit_blog_path(blog.id)}", class: 'text-reset'
+              btn.btn-danger.btn-sm = link_to "削除", "#{blog_path(blog.id)}", method: :delete, class: 'text-reset'
+          .card-footer = link_to "#{blog.user.name}", user_path(blog.user.id)
 
-table.table.table-hover
-  thead.thead-default
-    tr
-      th タイトル
-      th 内容
-      th 投稿者
-      th 画像
-      th
-      th
-      th
-  tbody
-  - @blogs.each do |blog|
-    tr
-      td = blog.title
-      td = blog.content
-      td = link_to "#{blog.user.name}", user_path(blog.user.id)
-      - if blog.image.present?
-        td = image_tag(blog.image.url(:thumb))
-      - else
-        td
-      td = link_to '詳細を確認する', blog_path(blog.id)
-      - if current_user.id == blog.user.id
-        td = link_to 'ブログを編集する', edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' }
-        td = link_to 'ブログを削除する', blog_path(blog.id), method: :delete, data: { confirm: '本当に削除していいですか？' }
-      - else
-        td
-        td
 
-= link_to '新しくブログを投稿する', new_blog_path
+/ table.table.table-hover
+/   thead.thead-default
+/     tr
+/       th タイトル
+/       th 内容
+/       th 投稿者
+/       th 画像
+/       th
+/       th
+/       th
+/   tbody
+/   - @blogs.each do |blog|
+/     tr
+/       td = blog.title
+/       td = blog.content
+/       td = link_to "#{blog.user.name}", user_path(blog.user.id)
+/       - if blog.image.present?
+/         td = image_tag(blog.image.url(:thumb))
+/       - else
+/         td
+/       td = link_to '詳細を確認する', blog_path(blog.id)
+/       - if current_user.id == blog.user.id
+/         td = link_to 'ブログを編集する', edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' }
+/         td = link_to 'ブログを削除する', blog_path(blog.id), method: :delete, data: { confirm: '本当に削除していいですか？' }
+/       - else
+/         td
+/         td
+
+/ = link_to '新しくブログを投稿する', new_blog_path
