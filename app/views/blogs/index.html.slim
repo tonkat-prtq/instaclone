@@ -13,14 +13,15 @@ head
           .card-body
             = blog.content
           - if current_user.id == blog.user.id
-            / ボタンを横並びに
             .d-flex
               = link_to "#{edit_blog_path(blog.id)}", class: 'text-reset'
                 i.fas.fa-edit.fa-lg.ml-3
               = link_to "#{blog_path(blog.id)}", method: :delete , class: 'text-reset'
                 i.fas.fa-trash.fa-lg.ml-2
-            / btn.btn-danger.btn-sm = link_to "削除", "#{blog_path(blog.id)}", method: :delete, class: 'text-reset'
-          .card-footer = link_to "#{blog.user.name}", user_path(blog.user.id)
+          .card-footer.d-flex
+            .img-circle.mr-2 = image_tag(blog.user.image.url(:thumb)) if blog.user.image.present?
+            = link_to "#{blog.user.name}", user_path(blog.user.id), class: 'text-black-50'
+
 
 
 / table.table.table-hover
