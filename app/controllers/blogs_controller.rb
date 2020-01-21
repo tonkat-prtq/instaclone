@@ -19,7 +19,7 @@ class BlogsController < ApplicationController
       render 'new'
     else
       if @blog.save
-        redirect_to blogs_path, notice: 'ブログを作成しました'
+        redirect_to blogs_path, flash: {success: "ブログを作成しました"}
         PostMailer.post_mail(current_user.email).deliver
       else
         render :new
@@ -31,7 +31,7 @@ class BlogsController < ApplicationController
     if current_user.id == @blog.user.id
       @blog.image.cache! unless @blog.image.blank? # 既に画像が存在する場合キャッシュを作成する
     else
-      redirect_to blogs_path, notice: "自分の記事以外の編集は出来ません"
+      redirect_to blogs_path, flash: {danger: "自分の記事以外の編集は出来ません"}
     end
   end
 
@@ -40,7 +40,7 @@ class BlogsController < ApplicationController
       render :edit
     else
       if @blog.update(blog_params)
-        redirect_to blogs_path, notice: 'ブログを編集しました'
+        redirect_to blogs_path, flash: {success: "ブログを編集しました"}
       else
         render :edit
       end
@@ -49,7 +49,7 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog.destroy
-    redirect_to blogs_path, notice: 'ブログを削除しました'
+    redirect_to blogs_path, flash: {danger: "ブログを削除しました"}
   end
 
   def show

@@ -6,6 +6,7 @@ head
   .row
     .col-md-12
       - @blogs.each do |blog|
+        - @favorite = current_user.favorites.find_by(blog_id: blog.id)
         .card.mb-5
           h5.card-header = link_to "#{blog.title}", blog_path(blog.id), class: 'text-reset'
           - if blog.image.present?
@@ -18,6 +19,13 @@ head
                 i.fas.fa-edit.fa-lg.ml-3
               = link_to "#{blog_path(blog.id)}", method: :delete , class: 'text-reset'
                 i.fas.fa-trash.fa-lg.ml-2
+          - else
+            - if @favorite.present?
+              = link_to favorite_path(id: @favorite.id), method: :delete, class: 'text-reset'
+                i.fas.fa-heart.fa-lg.ml-3
+            - else
+              = link_to favorites_path(blog_id: blog.id), method: :post, class: 'text-reset'
+                i.far.fa-heart.fa-lg.ml-3
           .card-footer.d-flex
             .img-circle.mr-2 = image_tag(blog.user.image.url(:thumb)) if blog.user.image.present?
             = link_to "#{blog.user.name}", user_path(blog.user.id), class: 'text-black-50'
