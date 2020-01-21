@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       render :edit
     else
       if @user.update(user_params)
-        redirect_to user_path(@user.id), notice: "プロフィールを編集しました" # showアクション発火させ詳細画面に飛ばす
+        redirect_to user_path(@user.id), flash: {success: "プロフィールを編集しました"} # showアクション発火させ詳細画面に飛ばす
       else
         render :edit
       end
