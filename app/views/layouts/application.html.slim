@@ -13,7 +13,7 @@ html
       button.navbar-toggler aria-controls="Navber" aria-expanded="false" aria-label="responsive navigation bar" data-target="#Navber" data-toggle="collapse" type="button"
         span.navbar-toggler-icon
       #Navber.collapse.navbar-collapse
-        ul.div.navbar-nav.mr-auto.mt-2.mt-lg-0
+        ul.div.navbar-nav.mr-auto
           - if logged_in?
             li.div.nav-item = link_to "My Page", user_path(current_user.id), class: 'nav-link'
             li.div.nav-item = link_to "Logout", session_path(current_user.id), method: :delete, class: 'nav-link'
