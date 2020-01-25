@@ -21,10 +21,10 @@ head
           - else
             .d-flex
             - if @favorite.present?
-              = link_to favorite_path(id: @favorite.id), method: :delete, class: 'text-reset'
+              = link_to favorite_path(id: @favorite.id), method: :delete, class: 'text-reset heart'
                 i.fas.fa-heart.fa-lg.ml-3
             - else
-              = link_to favorites_path(blog_id: blog.id), method: :post, class: 'text-reset'
+              = link_to favorites_path(blog_id: blog.id), method: :post, class: 'text-reset heart'
                 i.far.fa-heart.fa-lg.ml-3
           .card-footer.d-flex
             .img-circle.mr-2 = image_tag(blog.user.image.url(:thumb)) if blog.user.image.present?
