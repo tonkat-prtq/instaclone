@@ -21,6 +21,4 @@ table.table.table-hover
         td
       td = link_to '詳細を確認する', blog_path(blog.id)
       td = link_to 'お気に入り解除する', favorite_path(id: blog.favorites.find_by(user_id: current_user.id).id), method: :delete, class: 'btn btn-danger'
-
-
 = link_to 'TOP', blogs_path
