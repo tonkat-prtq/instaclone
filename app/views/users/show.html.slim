@@ -18,29 +18,6 @@ sass:
   h1
     color: white
   .jumbotron
-    background-image: url("/ELL85_kurisutarutenneseki20131118.jpg") 
-    / 試しにpublic下の画像を読み込んでいる
+    background-image: url(@user.image.url) 
     background-size: cover
     background-position: center 60%
-
-
-
-/ assets/image下→だめ
-/ public下→OK
-/ 単純なスペルミスとクラス指定する際の.のつけ忘れ
-
-/ = link_to 'ブログ一覧画面', blogs_path
-
-/ .jumbotron.jumbotron-fluid
-/   .container
-/     h1.display-4 幅一杯にジャンボトロン
-/     p.lead これは親要素の全ての横方向の空白一杯に広がるように設定変更されたジャンボトロンです。
-/   /! /.container
-/ /! /.jumbotron
-/ .container
-/   | \...
-/ /! /.container
-
-    / background-image: url("./ELL85_kurisutarutenneseki20131118.jpg")
-    / background-size: cover
-    / background-position: center 60%
