@@ -14,11 +14,12 @@ head
             = blog.content
           - if current_user.id == blog.user.id
             .d-flex
-              = link_to "#{edit_blog_path(blog.id)}", class: 'text-reset'
+              = link_to edit_blog_path(blog.id), class: 'text-reset'
                 i.fas.fa-edit.fa-lg.ml-3
-              = link_to "#{blog_path(blog.id)}", method: :delete , class: 'text-reset'
+              = link_to blog_path(blog.id), method: :delete , class: 'text-reset'
                 i.fas.fa-trash.fa-lg.ml-2
           - else
+            .d-flex
             - if @favorite.present?
               = link_to favorite_path(id: @favorite.id), method: :delete, class: 'text-reset'
                 i.fas.fa-heart.fa-lg.ml-3
