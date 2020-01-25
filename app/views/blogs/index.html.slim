@@ -1,6 +1,4 @@
-/ h1 ブログ一覧
 head
-
 .card-deck
   .row
     .col-md-12
@@ -29,8 +27,6 @@ head
           .card-footer.d-flex
             .img-circle.mr-2 = image_tag(blog.user.image.url(:thumb)) if blog.user.image.present?
             = link_to "#{blog.user.name}", user_path(blog.user.id), class: 'text-black-50'
-
-
 
 / table.table.table-hover
 /   thead.thead-default
