@@ -1,0 +1,21 @@
+.jumbotron.jumbotron-fluid
+  - if @user.image.url.present?
+  .container
+    h1.display-4h1 #{@user.name} 
+    p.lead
+  .container
+    - if @user.image.url.present?
+      p = image_tag @user.image.profile.url
+    - if @user.id == current_user.id
+      p
+        |Email : #{@user.email}
+      = link_to 'edit', edit_user_path(@user.id), data: { confirm: 'Are you sure you want to edit it?' }, class: 'btn btn-info'
+      = link_to 'my favorites', my_favorite_user_path(@user.id), class: 'btn btn-secondary ml-2'
+sass:
+  h1
+    color: mediumaquamarine
+
+/ .jumbotron
+/   background-image: url(@user.image.url) 
+/   background-size: cover
+/   background-position: center 60%

@@ -1,1 +1,22 @@
 @import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+.far.fa-heart{
+  color: darkgrey;
+  &:hover{
+    color: deeppink;
+  }
+}
+
+.fas.fa-heart{
+  color: deeppink;
+  &:hover{
+    color: darkgrey;
+    opacity: 0.5;
+  }
+}
+
+.heart {
+  width: 1rem;
+}
