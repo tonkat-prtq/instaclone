@@ -6,7 +6,7 @@ ruby '2.6.5'
 
 gem 'rails', '~> 5.2.3'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 3.12'
+gem "puma", ">= 3.12.2"
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -27,6 +27,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'letter_opener_web'
 end
 
 group :test do
@@ -39,3 +40,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
 gem 'html2slim'
 gem 'bootstrap'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'faker'
+gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 5.4.1'
+gem 'pry-byebug'

@@ -1,0 +1,39 @@
+.card
+  .card-header = @blog.title
+  - if @blog.image.url.present?
+    img.card-img-top alt="カードの画像" src="#{@blog.image.url}" /
+  .card-body
+    p.card-text  = @blog.content
+    - if current_user.id == @blog.user.id
+      .d-flex
+        = link_to "#{edit_blog_path(@blog.id)}", class: 'text-reset'
+          i.fas.fa-edit.fa-lg
+        = link_to "#{blog_path(@blog.id)}", method: :delete , class: 'text-reset'
+          i.fas.fa-trash.fa-lg.ml-2
+    - else
+      - if @favorite.present?
+        = link_to favorite_path(id: @favorite.id), method: :delete, class: 'text-reset'
+          i.fas.fa-heart.fa-lg
+      - else
+        = link_to favorites_path(blog_id: @blog.id), method: :post, class: 'text-reset'
+          i.far.fa-heart.fa-lg
+  .card-footer.d-flex
+    .img-circle = image_tag(@blog.user.image.url(:thumb)) if @blog.user.image.present?
+    = link_to "#{@blog.user.name}", user_path(@blog.user.id), class: 'text-black-50'
+
+/ h1 ブログ詳細画面
+/ p
+/   | タイトル: #{@blog.title}
+/ p
+/   | 内容: #{@blog.content}
+/ p
+/   | 投稿者: #{@blog.user.name}
+
+/ - if @blog.image.url.present? 
+/   p 画像: #{image_tag @blog.image.url}
+
+/ - unless @blog.user_id == current_user.id
+/   - if @favorite.present?
+/     = link_to 'お気に入り解除する', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger'
+/   - else
+/     = link_to 'お気に入り登録する', favorites_path(blog_id: @blog.id), method: :post, class: 'btn btn-primary'

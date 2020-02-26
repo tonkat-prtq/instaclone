@@ -1,0 +1,59 @@
+head
+.card-deck
+  .row
+    .col-md-12
+      - @blogs.each do |blog|
+        - @favorite = current_user.favorites.find_by(blog_id: blog.id)
+        .card.mb-5
+          h5.card-header = link_to "#{blog.title}", blog_path(blog.id), class: 'text-reset'
+          - if blog.image.present?
+            img.card-img-top src="#{blog.image.url}" /
+          .card-body
+            = blog.content
+          - if current_user.id == blog.user.id
+            .d-flex
+              = link_to edit_blog_path(blog.id), class: 'text-reset'
+                i.fas.fa-edit.fa-lg.ml-3
+              = link_to blog_path(blog.id), method: :delete , class: 'text-reset'
+                i.fas.fa-trash.fa-lg.ml-2
+          - else
+            .d-flex
+            - if @favorite.present?
+              = link_to favorite_path(id: @favorite.id), method: :delete, class: 'text-reset heart'
+                i.fas.fa-heart.fa-lg.ml-3
+            - else
+              = link_to favorites_path(blog_id: blog.id), method: :post, class: 'text-reset heart'
+                i.far.fa-heart.fa-lg.ml-3
+          .card-footer.d-flex
+            .img-circle.mr-2 = image_tag(blog.user.image.url(:thumb)) if blog.user.image.present?
+            = link_to "#{blog.user.name}", user_path(blog.user.id), class: 'text-black-50'
+
+/ table.table.table-hover
+/   thead.thead-default
+/     tr
+/       th タイトル
+/       th 内容
+/       th 投稿者
+/       th 画像
+/       th
+/       th
+/       th
+/   tbody
+/   - @blogs.each do |blog|
+/     tr
+/       td = blog.title
+/       td = blog.content
+/       td = link_to "#{blog.user.name}", user_path(blog.user.id)
+/       - if blog.image.present?
+/         td = image_tag(blog.image.url(:thumb))
+/       - else
+/         td
+/       td = link_to '詳細を確認する', blog_path(blog.id)
+/       - if current_user.id == blog.user.id
+/         td = link_to 'ブログを編集する', edit_blog_path(blog.id), data: { confirm: '本当に編集していいですか？' }
+/         td = link_to 'ブログを削除する', blog_path(blog.id), method: :delete, data: { confirm: '本当に削除していいですか？' }
+/       - else
+/         td
+/         td
+
+/ = link_to '新しくブログを投稿する', new_blog_path

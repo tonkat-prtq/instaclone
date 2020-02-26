@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, shallow: true do
+    get :my_favorite, on: :member # idが必要なときはmember,そうでないときはcollection
+  end
+  
+  resources :blogs do
+    collection do
+      post :confirm
+      patch :confirm
+    end
+    member do
+      patch :confirm
+    end
+  end
+
+  resources :favorites, only: [:create, :destroy]
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

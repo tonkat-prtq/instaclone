@@ -1,0 +1,21 @@
+= form_with(model: blog, local: true, url: choose_new_or_edit) do |f|
+  - if blog.errors.any?
+    div#error_explanation
+      h2 #{blog.errors.count}件のエラーがあります。
+      ul
+      - blog.errors.full_messages.each do |msg|
+        li #{msg}
+
+  div.blog_title.form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  div.blog_content.form-group
+    = f.label :content
+    = f.text_field :content, class: 'form-control'
+  div.blog_image
+    = f.label :image
+    = image_tag(blog.image.url) if blog.image && blog.image.url
+    = f.file_field :image, class: 'form-control-file'
+    = f.hidden_field :image_cache
+  = f.submit('Send',class: 'btn btn-primary btn-lg my-2 mb-5 px-5')
+= link_to 'トップに戻る', blogs_path
